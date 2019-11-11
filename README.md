@@ -13,3 +13,8 @@ This application can export any data saved in EDF file to csv format.
 
 ## Requiears
 - pyedflib
+- pandas
+
+## Help!😂
+I want to add time column, but it takes long time to convert to CSV because the number of samples is large. Is there a good solution? If you have, please make an issue for me. Thank you.
+

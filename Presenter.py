@@ -41,3 +41,6 @@ class Presenter():
 
     def convertToCsv(self):
         print("convert")
+        checkedIndexArray = [i for i, x in enumerate(
+            self.model.isChecked) if x == True]
+        self.model.convert(checkedIndexArray)

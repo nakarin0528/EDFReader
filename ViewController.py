@@ -7,6 +7,7 @@ import tkinter.ttk as ttk
 from Model import Model
 from Presenter import Presenter
 import tkinter.filedialog
+import threading
 
 
 class ViewController():
@@ -77,6 +78,12 @@ class ViewController():
             self.presenter.convertToCsv()
         else:
             print("error")
+        self.convertButton.configure(state=tk.NORMAL)
+
+    def convertCallback(self):
+        self.convertButton.configure(state=tk.DISABLED)
+        th = threading.Thread(target=self.convertToCsv)
+        th.start()
 
     def showAllInfo(self, fm):
         signalLabels = self.presenter.getSignalLabels()
@@ -179,7 +186,7 @@ class ViewController():
         self.convertButton = tk.Button(
             frame,
             text="convert",
-            command=self.convertToCsv
+            command=self.convertCallback
         )
         self.convertButton.grid(row=self.irow, column=2, padx=0, pady=0)
         self.convertButton['state'] = tk.DISABLED

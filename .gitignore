@@ -1,3 +1,5 @@
 .python-version
 *.edf
 __pycache__/
+.DS_Store
+output/
