@@ -9,8 +9,8 @@ import pyedflib
 class Model():
     def __init__(self):
         # window
-        self.width = 500
-        self.height = 480
+        self.width = 1000
+        self.height = 600
 
         # path
         self.filePath = ""
@@ -19,9 +19,10 @@ class Model():
         # edf
         self.edf = None
 
+        self.isChecked = []  # for checkButton
+
     def loadEDF(self, path):
         self.edf = pyedflib.EdfReader(path)
-        print(self.edf.file_info())
 
     def setOutputPath(self, path):
         self.outputPath = path
