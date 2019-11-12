@@ -14,7 +14,6 @@ This application can export any data saved in EDF file to csv format.
 - [pyedflib](https://pyedflib.readthedocs.io/en/latest/)
 - [pandas](https://pandas.pydata.org/)
 - python >= 3.6
-- macOS (I don't check the operation on windows)
 
 ## Help!😂
 I want to add time column, but it takes long time to convert to CSV because the number of samples is large. Is there a good solution? If you have, please make an issue for me. Thank you.
