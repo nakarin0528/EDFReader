@@ -9,7 +9,6 @@ This application can export any data saved in EDF file to csv format.
 
 ## Comming soon...😉
 - Data preview function (graphing)
-- Extraction time setting
 
 ## Requiears
 - [pyedflib](https://pyedflib.readthedocs.io/en/latest/)
