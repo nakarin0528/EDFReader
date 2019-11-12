@@ -6,13 +6,12 @@ import time
 import pyedflib
 import pandas as pd
 import datetime
-import numpy as np
 
 
 class Model():
     def __init__(self):
         # window
-        self.width = 1000
+        self.width = 700
         self.height = 600
 
         # path
