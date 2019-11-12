@@ -12,11 +12,11 @@ class Presenter():
         self.model.loadEDF(path)
 
     def getStartTime(self):
-        return self.model.edf.getStartdatetime()
+        return self.model.edf.getStartdatetime().strftime("%Y/%m/%d %H:%M:%S")
 
     def getEndTime(self):
-        return self.getStartTime() + datetime.timedelta(seconds=int(
-            self.getSignalNSumples()[0] / self.getSignalFs()[0]))
+        return (self.model.edf.getStartdatetime() + datetime.timedelta(seconds=int(
+            self.getSignalNSumples()[0] / self.getSignalFs()[0]))).strftime("%Y/%m/%d %H:%M:%S")
 
     def getSignalLabels(self):
         return self.model.edf.getSignalLabels()
@@ -44,3 +44,17 @@ class Presenter():
         checkedIndexArray = [i for i, x in enumerate(
             self.model.isChecked) if x == True]
         self.model.convert(checkedIndexArray)
+
+    def dateTimeValidation(self, startTime, endTime):
+        self.model.startTime = datetime.datetime.strptime(
+            startTime, '%Y/%m/%d %H:%M:%S')
+        self.model.endTime = datetime.datetime.strptime(
+            endTime, '%Y/%m/%d %H:%M:%S')
+        try:
+            self.model.startTime = datetime.datetime.strptime(
+                startTime, '%Y/%m/%d %H:%M:%S')
+            self.model.endTime = datetime.datetime.strptime(
+                endTime, '%Y/%m/%d %H:%M:%S')
+            return True
+        except ValueError:
+            return False

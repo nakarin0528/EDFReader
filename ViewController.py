@@ -20,6 +20,8 @@ class ViewController():
         self.irow = 0
         self.pathLabel = None
         self.convertButton = None
+        self.startTextfield = None
+        self.endTextfield = None
 
         self.pwMain = tk.PanedWindow(self.master, orient='horizontal')
         self.pwMain.pack(expand=True, fill=tk.BOTH, side="left")
@@ -76,10 +78,24 @@ class ViewController():
         self.convertButton['state'] = tk.NORMAL if isEnable else tk.DISABLED
 
     def convertToCsv(self):
+        isFormatOK = self.presenter.dateTimeValidation(
+            self.startTextfield.get(),
+            self.endTextfield.get()
+        )
+        if not isFormatOK:
+            tkmsg.showinfo(
+                title="Error!",
+                message="correct format is follow\nYYYY/MM/DD hh:mm/ss")
+            return
+
         if self.presenter.isChecked():
             self.presenter.convertToCsv()
         else:
-            print("error")
+            tkmsg.showinfo(
+                title="Error!",
+                message="something goes wrong...")
+            return
+
         self.convertButton.configure(state=tk.NORMAL)
         tkmsg.showinfo(title="completed!", message="Complete!")
 
@@ -97,18 +113,15 @@ class ViewController():
         endTime = self.presenter.getEndTime()
 
         # start and end time labels
-        startLabel = tk.Label(
-            fm, text="start: " + startTime.strftime("%Y/%m/%d %H:%M:%S"))
+        startLabel = tk.Label(fm, text="start: " + startTime)
         startLabel.grid(row=self.irow, column=0, padx=1, pady=0)
         self.irow += 1
-        endLabel = tk.Label(fm, text="end: " +
-                            endTime.strftime("%Y/%m/%d %H:%M:%S"))
+        endLabel = tk.Label(fm, text="end: " + endTime)
         endLabel.grid(row=self.irow, column=0, padx=1, pady=0)
         self.irow += 1
 
         # signal table
-        canvas = tkinter.Canvas(fm, width=480,
-                                height=400)
+        canvas = tkinter.Canvas(fm, width=480, height=400)
         canvas.grid(row=self.irow, rowspan=N, column=0, columnspan=4)
 
         scrollBar = ttk.Scrollbar(fm, orient=tk.VERTICAL)
@@ -186,13 +199,21 @@ class ViewController():
         foldarButton.grid(row=self.irow, column=2, padx=0, pady=0)
         self.irow += 1
 
-        startLabel = tk.Label(
-            fm, text="start: " + self.presenter.getStartTime().strftime("%Y/%m/%d %H:%M:%S"))
+        startLabel = tk.Label(fm, text="start:")
         startLabel.grid(row=self.irow, column=0, padx=1, pady=0)
+
+        self.startTextfield = tk.Entry(fm)
+        self.startTextfield.insert(
+            tk.END, self.presenter.getStartTime())
+        self.startTextfield.grid(row=self.irow, column=1, padx=1, pady=0)
         self.irow += 1
-        endLabel = tk.Label(fm, text="end: " +
-                            self.presenter.getEndTime().strftime("%Y/%m/%d %H:%M:%S"))
+
+        endLabel = tk.Label(fm, text="end:")
         endLabel.grid(row=self.irow, column=0, padx=1, pady=0)
+        self.endTextfield = tk.Entry(fm)
+        self.endTextfield.insert(
+            tk.END, self.presenter.getEndTime())
+        self.endTextfield.grid(row=self.irow, column=1, padx=1, pady=0)
         self.irow += 1
 
         self.convertButton = tk.Button(
