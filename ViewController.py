@@ -7,6 +7,7 @@ import tkinter.ttk as ttk
 from Model import Model
 from Presenter import Presenter
 import tkinter.filedialog
+import tkinter.messagebox as tkmsg
 import threading
 
 
@@ -43,9 +44,10 @@ class ViewController():
         self.irow += 1
 
     def showDialog(self, mode):
-        fTyp = [("", "*")]
+
         iDir = os.path.abspath(os.path.dirname(__file__))
         if mode == 'file':
+            fTyp = [("", "*.edf")]
             filePath = tk.filedialog.askopenfilename(
                 filetypes=fTyp, initialdir=iDir)
             return filePath
@@ -79,6 +81,7 @@ class ViewController():
         else:
             print("error")
         self.convertButton.configure(state=tk.NORMAL)
+        tkmsg.showinfo(title="completed!", message="Complete!")
 
     def convertCallback(self):
         self.convertButton.configure(state=tk.DISABLED)
@@ -181,6 +184,15 @@ class ViewController():
             text="foldar",
             command=self.setOutputPath)
         foldarButton.grid(row=self.irow, column=2, padx=0, pady=0)
+        self.irow += 1
+
+        startLabel = tk.Label(
+            fm, text="start: " + self.presenter.getStartTime().strftime("%Y/%m/%d %H:%M:%S"))
+        startLabel.grid(row=self.irow, column=0, padx=1, pady=0)
+        self.irow += 1
+        endLabel = tk.Label(fm, text="end: " +
+                            self.presenter.getEndTime().strftime("%Y/%m/%d %H:%M:%S"))
+        endLabel.grid(row=self.irow, column=0, padx=1, pady=0)
         self.irow += 1
 
         self.convertButton = tk.Button(
