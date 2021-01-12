@@ -5,3 +5,6 @@ __pycache__/
 output/
 setup.py
 build/
+.vscode/
+*.spec
+dist/
