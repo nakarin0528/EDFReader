@@ -34,6 +34,3 @@ You can get sample data of EDF file from [official github repo](https://github.c
 ## Comming soon...😉
 - Data preview function (graphing)
 
-## Help!😂
-I want to add time column, but it takes long time to convert to CSV because the number of samples is large. Is there a good solution? If you have, please make an issue for me. Thank you.
-
