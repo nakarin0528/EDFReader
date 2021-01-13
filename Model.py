@@ -54,7 +54,6 @@ class Model():
                 time_label.append(self.startTime +
                             datetime.timedelta(microseconds=((i / fs) * 1000000)))
 
-            print(time_label)
             trimedSignals = self.edf.readSignal(index)[
                 int(diff_startTime_sec) * N: int(during_time_sec) * N]
             signals.extend(trimedSignals)
